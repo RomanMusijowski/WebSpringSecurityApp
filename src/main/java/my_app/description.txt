@@ -1,0 +1,6 @@
+1.create db with normal relationship tables
+2.connect and try save, update, delete entitys
+3.create dao
+4.create security
+5.create services
+...
