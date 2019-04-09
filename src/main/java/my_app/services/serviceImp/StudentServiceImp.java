@@ -26,4 +26,9 @@ public class StudentServiceImp implements StudentService {
 
         return studentDao.findByStudentName(studentName);
     }
+
+    @Override
+    public Student findByStudentEmail(String studentEmail) {
+        return null;
+    }
 }

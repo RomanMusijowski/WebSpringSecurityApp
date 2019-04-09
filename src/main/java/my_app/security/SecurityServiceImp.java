@@ -8,8 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Service;
 
 
+@Service
 public class SecurityServiceImp implements SecurityService{
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImp.class);
@@ -21,7 +23,7 @@ public class SecurityServiceImp implements SecurityService{
     private AuthenticationManager authenticationManager;
 
     @Override
-    public String findLoggedInUserName() {
+    public String findLoggedInUserEmail() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
         if (userDetails instanceof UserDetails){
             return ((UserDetails) userDetails).getUsername();
@@ -30,8 +32,8 @@ public class SecurityServiceImp implements SecurityService{
     }
 
     @Override
-    public void autoLogin(String userName, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+    public void autoLogin(String teacherEmail, String password) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(teacherEmail);
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
@@ -40,7 +42,7 @@ public class SecurityServiceImp implements SecurityService{
         if (authenticationToken.isAuthenticated()){
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
-            logger.debug(String.format("Successfully %s auto logger in", userName));
+            logger.debug(String.format("Successfully %s auto logger in", teacherEmail));
         }
 
     }

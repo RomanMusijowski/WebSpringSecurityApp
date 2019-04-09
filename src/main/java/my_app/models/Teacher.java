@@ -18,9 +18,6 @@ public class Teacher {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "sur_name")
-    private String surName;
-
     @Column(name = "password")
     private String password;
 
@@ -31,11 +28,10 @@ public class Teacher {
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     private List<Lesson> lessons;
 
-    public Teacher(Long teacher_id, String email, String name, String surName) {
+    public Teacher(Long teacher_id, String email, String name) {
         this.teacher_id = teacher_id;
         this.email = email;
         this.name = name;
-        this.surName = surName;
     }
 
 
@@ -64,17 +60,7 @@ public class Teacher {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurName() {
-        return surName;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
+    public void setName(String name) { this.name = name; }
 
     public String getPassword() {
         return password;
@@ -106,7 +92,6 @@ public class Teacher {
                 "id=" + teacher_id +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
-                ", surName='" + surName + '\'' +
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
                 ", lessons=" + lessons +

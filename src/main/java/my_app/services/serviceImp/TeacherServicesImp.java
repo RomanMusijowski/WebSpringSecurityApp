@@ -29,9 +29,6 @@ public class TeacherServicesImp implements TeacherService {
     @Override
     public void save(Teacher teacher) {
         teacher.setPassword(bCryptPasswordEncoder.encode(teacher.getPassword()));
-//        List<Lesson> lessons = new ArrayList<>();
-//        lessons.add(teacher);
-//        teacher.setLessons(lessons);
         teacherDao.save(teacher);
     }
 
@@ -40,12 +37,22 @@ public class TeacherServicesImp implements TeacherService {
         return teacherDao.findByTeacherName(teacherName);
     }
 
-
-    public Teacher delete(Teacher teacher){
-        Teacher temp = teacherDao.findOne(teacher.getId());
-        teacherDao.delete(teacher);
-        return teacher;
+    @Override
+    public Teacher findByTeacherEmail(String teacherEmail) {
+        return teacherDao.findByTeacherEmail(teacherEmail);
     }
+
+
+//    public Teacher delete(Teacher teacher){
+//        Teacher temp = teacherDao.findOne(teacher.getId());
+//        teacherDao.delete(teacher);
+//        return teacher;
+//    }
+//
+//    @Override
+//    public void update(Teacher teacher) {
+//
+//    }
 
 
 }
